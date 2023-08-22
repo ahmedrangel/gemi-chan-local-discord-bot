@@ -2,7 +2,6 @@ import puppeteer from "puppeteer";
 
 export const getNotification = async (channel) => {
   const kickUrl = `https://kick.com/${channel.toLowerCase()}`;
-  
   const browser = await puppeteer.launch({
     headless: false,
     executablePath: "/nix/store/x205pbkd5xh5g4iv0g58xjla55has3cx-chromium-108.0.5359.94/bin/chromium-browser",
