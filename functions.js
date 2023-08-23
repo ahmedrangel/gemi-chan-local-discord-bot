@@ -5,10 +5,10 @@ export const diasFaltantes = (año, mes, dia) => {
   const fechaObjetivo = new Date(año, mes - 1, dia);
   const diferenciaMilisegundos = fechaObjetivo - fechaActual;
   return Math.ceil(diferenciaMilisegundos / (1000 * 60 * 60 * 24));
-}
+};
 
 export const birthdaysList = async () => {
-  let lista = []
+  let lista = [];
   const birthdaysR = await fetch(process.env["GEMIDOR_WORKER"] + "/birthdays");
   const birthdays = await birthdaysR.json();
   const año = new Date().getFullYear();
@@ -20,4 +20,4 @@ export const birthdaysList = async () => {
   });
   lista = lista.sort((a, b) => a.timestamp - b.timestamp);
   return lista;
-}
+};

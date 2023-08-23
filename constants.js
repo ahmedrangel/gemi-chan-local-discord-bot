@@ -47,4 +47,4 @@ export const MONTHS = [
     "name": "Diciembre",
     "value": 12
   }
-]
+];

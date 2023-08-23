@@ -9,7 +9,7 @@ export const getNotification = async (channel) => {
   });
   
   const page = await browser.newPage();
-  await page.goto(`https://kick.com/api/v1/channels/${channel.toLowerCase()}`, {waitUntil: 'networkidle0'});
+  await page.goto(`https://kick.com/api/v1/channels/${channel.toLowerCase()}`, {waitUntil: "networkidle0"});
   
   const data = await page.evaluate(() => {
     const scripts = document.querySelectorAll("script");
@@ -78,7 +78,7 @@ export const getNotification = async (channel) => {
       text: "Kick",
       icon_url: "https://gemi-chan.ahmedrangel.com/images/kick-footer.png"
     }
-  }
+  };
   
   const components = {
     type: 1,
@@ -88,13 +88,14 @@ export const getNotification = async (channel) => {
       url: kickUrl,
       style: 5
     }]
-  }
+  };
   
   let send;
-  notificar == true ? send = {content: msg,
-                             embeds: [embed],
-                             components: [components]
-                            } : send = null;
+  notificar == true ? send = {
+    content: msg,
+    embeds: [embed],
+    components: [components]
+  } : send = null;
   await browser.close();
   return send;
 };
