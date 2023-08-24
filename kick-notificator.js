@@ -7,17 +7,17 @@ export const getNotification = async (channel) => {
     executablePath: "/nix/store/x205pbkd5xh5g4iv0g58xjla55has3cx-chromium-108.0.5359.94/bin/chromium-browser",
     args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
-  
+
   const page = await browser.newPage();
   await page.goto(`https://kick.com/api/v1/channels/${channel.toLowerCase()}`, {waitUntil: "networkidle0"});
-  
+
   const data = await page.evaluate(() => {
     const scripts = document.querySelectorAll("script");
     scripts.forEach(script => script.remove());
     return document.body.innerHTML;
   });
   const channelData = JSON.parse(data);
-  
+
   let check, title, category, thumbnail, user, profile_pic, followers;
   user = channelData.user.username;
   followers = channelData.followersCount;
@@ -36,7 +36,7 @@ export const getNotification = async (channel) => {
   const worker = await fetch(`${process.env["AHMED_WORKER"]}/dc/kick-live?channel=zihnee&check=${check}`);
   const workerR = await worker.json();
   const notificar = workerR.notificar;
-  
+
   console.log({
     is_live: check,
     notify: workerR.notificar,
@@ -47,9 +47,9 @@ export const getNotification = async (channel) => {
     profile_pic: profile_pic,
     thumbnail: thumbnail
   });
-  
+
   const msg = `@everyone ${channel} ya comenzó directo en KICK! Vení a verla: <${kickUrl}>\n<:kick:1124341413778305126> ${title}`;
-  
+
   const embed = {
     color: 0xf697c8,
     title: title,
@@ -79,7 +79,7 @@ export const getNotification = async (channel) => {
       icon_url: "https://gemi-chan.ahmedrangel.com/images/kick-footer.png"
     }
   };
-  
+
   const components = {
     type: 1,
     components: [{
@@ -89,7 +89,7 @@ export const getNotification = async (channel) => {
       style: 5
     }]
   };
-  
+
   let send;
   notificar == true ? send = {
     content: msg,

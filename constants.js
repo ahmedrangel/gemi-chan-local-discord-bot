@@ -9,7 +9,7 @@ export const MONTHS = [
   },
   {
     "name": "Marzo",
-    "value": 3 
+    "value": 3
   },
   {
     "name": "Abril",
