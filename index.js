@@ -24,7 +24,7 @@ client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const zihne_guild = client.guilds.cache.get("1058558693001658448");
   const birthday_rol = zihne_guild.roles.cache.get("1131030143075373116");
-  const channel_scheduled = await client.channels.fetch("1048659746137317498");
+  const channel_scheduled = await client.channels.fetch("1058558693597270087");
   /*
   // Chequear si está Live en Kick
   const checkKickLive = async() => {
