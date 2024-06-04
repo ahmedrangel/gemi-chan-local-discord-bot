@@ -9,6 +9,10 @@ const characterAI = new CharacterAI();
 await characterAI.authenticateWithToken(process.env["CHARACTERAI_TOKEN"]);
 const chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
 
+if (!process.env["WINDOWS"]) {
+  characterAI.puppeteerPath = "/usr/bin/google-chrome-stable";
+}
+
 server.all("/", (req, res) => {
   res.setHeader("Content-Type", "text/html");
   res.write("<p>Hosting Active</p>");
