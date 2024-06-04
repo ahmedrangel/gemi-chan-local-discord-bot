@@ -7,11 +7,12 @@ import CharacterAI from "node_characterai";
 const server = express();
 const characterAI = new CharacterAI();
 await characterAI.authenticateWithToken(process.env["CHARACTERAI_TOKEN"]);
-const chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
 
-if (!process.env["WINDOWS"]) {
+if (!Boolean(process.env["WINDOWS"])) {
   characterAI.puppeteerPath = "/usr/bin/google-chrome-stable";
 }
+
+const chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
 
 server.all("/", (req, res) => {
   res.setHeader("Content-Type", "text/html");
