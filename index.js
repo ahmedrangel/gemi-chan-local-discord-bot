@@ -2,8 +2,12 @@ import { Client, GatewayIntentBits } from "discord.js";
 import express from "express";
 import "dotenv/config";
 import * as C from "./commands/index.js";
+import CharacterAI from "node_characterai";
 
 const server = express();
+const characterAI = new CharacterAI();
+await characterAI.authenticateWithToken(process.env["CHARACTERAI_TOKEN"]);
+const chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
 
 server.all("/", (req, res) => {
   res.setHeader("Content-Type", "text/html");
@@ -35,9 +39,13 @@ client.on("messageCreate", async (interaction) => {
   case "!ia":
     await C.IA(interaction, text, username);
     break;
+  case "!zihnee":
+    await C.Zihnee(interaction, chat, text, username);
+    break;
   }
 });
 
+/*
 client.on("guildMemberAdd", async (member) => {
   const zihne_guild = client.guilds.cache.get("1058558693001658448");
   const join_rol = zihne_guild.roles.cache.get("1059712226623230044");
@@ -53,6 +61,7 @@ client.on("guildMemberAdd", async (member) => {
       });
   }
 });
+*/
 
 client.login(process.env["DISCORD_TOKEN"]);
 

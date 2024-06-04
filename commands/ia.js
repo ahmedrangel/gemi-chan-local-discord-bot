@@ -11,5 +11,5 @@ export const IA = async (interaction, text, username) => {
     msg = msg.slice(0, 1998);
     console.log("Respuesta supera los 1999 caracteres");
   }
-  interaction.reply(msg);
+  await interaction.reply(msg);
 }
