@@ -7,7 +7,7 @@ import CharacterAI from "node_characterai";
 const server = express();
 const characterAI = new CharacterAI();
 
-if (!Boolean(process.env["WINDOWS"])) {
+if (process.env["WINDOWS"] !== "true") {
   characterAI.puppeteerPath = "/usr/bin/google-chrome-stable";
 }
 
