@@ -12,7 +12,7 @@ if (process.env["WINDOWS"] !== "true") {
 }
 
 await characterAI.authenticateWithToken(process.env["CHARACTERAI_TOKEN"]);
-const chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
+let chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
 
 server.all("/", (req, res) => {
   res.setHeader("Content-Type", "text/html");
@@ -47,10 +47,11 @@ client.on("messageCreate", async (interaction) => {
   case "!zihnee":
     await C.Zihnee(interaction, chat, text, username);
     break;
+  case "!restarcharacterai":
+    chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
   }
 });
 
-/*
 client.on("guildMemberAdd", async (member) => {
   const zihne_guild = client.guilds.cache.get("1058558693001658448");
   const join_rol = zihne_guild.roles.cache.get("1059712226623230044");
@@ -66,7 +67,6 @@ client.on("guildMemberAdd", async (member) => {
       });
   }
 });
-*/
 
 client.login(process.env["DISCORD_TOKEN"]);
 
