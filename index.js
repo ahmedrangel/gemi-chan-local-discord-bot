@@ -11,8 +11,12 @@ if (process.env["WINDOWS"] !== "true") {
   characterAI.puppeteerPath = "/usr/bin/google-chrome-stable";
 }
 
-await characterAI.authenticateWithToken(process.env["CHARACTERAI_TOKEN"]);
-let chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
+let chat;
+
+const caiAuth = async () => {
+  await characterAI.authenticateWithToken(process.env["CHARACTERAI_TOKEN"]);
+  chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
+}
 
 server.all("/", (req, res) => {
   res.setHeader("Content-Type", "text/html");
@@ -32,6 +36,7 @@ const client = new Client({
 
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  await caiAuth();
 });
 
 client.on("messageCreate", async (interaction) => {
@@ -48,7 +53,7 @@ client.on("messageCreate", async (interaction) => {
     await C.Zihnee(interaction, chat, text, username);
     break;
   case "!restartcharacterai":
-    chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
+    await caiAuth();
   }
 });
 
