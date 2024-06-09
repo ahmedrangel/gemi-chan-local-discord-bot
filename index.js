@@ -54,6 +54,7 @@ client.on("messageCreate", async (interaction) => {
     break;
   case "!restartcharacterai":
     await caiAuth();
+    break;
   }
 });
 
