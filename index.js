@@ -47,7 +47,7 @@ client.on("messageCreate", async (interaction) => {
   case "!zihnee":
     await C.Zihnee(interaction, chat, text, username);
     break;
-  case "!restarcharacterai":
+  case "!restartcharacterai":
     chat = await characterAI.createOrContinueChat("T5s3KtNBl_YKnKqPyivSkYiXupGceuq8Qxpcgc4o0Qg");
   }
 });
